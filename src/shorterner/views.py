@@ -5,6 +5,9 @@ from django.views import View
 
 from .models import ShortURL
 
+def test_view(request, *args, **kwargs):
+    return HttpResponse("Dummy page here.")
+
 def shorturl_redirect_view(request, shortcode=None, *args, **kwargs):
     obj = get_object_or_404(ShortURL, shortcode=shortcode)
     print("Found {su}.".format(su=obj.url))

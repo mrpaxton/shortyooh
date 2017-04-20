@@ -62,6 +62,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'shorturl.urls'
 ROOT_HOSTCONF = 'shorturl.hosts'
 DEFAULT_HOST = 'www' #from host_patterns in hosts.py
+DEFAULT_REDIRECT_URL = "http://www.shortyooh.com:8000"
 
 TEMPLATES = [
     {
