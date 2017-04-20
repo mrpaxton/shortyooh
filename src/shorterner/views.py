@@ -1,18 +1,20 @@
 from django.shortcuts import render, get_object_or_404
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views import View
 
 from .models import ShortURL
 
 def shorturl_redirect_view(request, shortcode=None, *args, **kwargs):
     obj = get_object_or_404(ShortURL, shortcode=shortcode)
-    return HttpResponse("Hello {sc}.".format(sc=obj.url))
+    print("Found {su}.".format(su=obj.url))
+    return HttpResponseRedirect(obj.url)
 
 class ShorturlCBView(View):
     def get(self, request, shortcode=None, *args, **kwargs):
         obj = get_object_or_404(ShortURL, shortcode=shortcode)
-        return HttpResponse("Hello {url}.".format(url=obj.url))
+        print("Found {su}.".format(su=obj.url))
+        return HttpResponseRedirect(obj.url)
 
 """
     Objective: try to get object using incoming shortcode

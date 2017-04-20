@@ -123,7 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # custom values for Shorturl apps
-SHORTCODE_MAX = 10
-SHORTCODE_MIN = 4
+SHORTCODE_MAX = 15
+SHORTCODE_MIN = 6
 
 
