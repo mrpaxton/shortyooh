@@ -25,7 +25,7 @@ SECRET_KEY = '--p(n51z+wnrezym_n44av8e13=6#e(9fdi63r-!t!4bd%t$cd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.shortyooh.com']
 
 
 # Application definition
@@ -37,12 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    #3rd party
+    'django_hosts',
     #custom apps
     'shorterner',
+
+
 ]
 
 MIDDLEWARE = [
+    'django_hosts.middleware.HostsRequestMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,9 +55,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 ROOT_URLCONF = 'shorturl.urls'
+ROOT_HOSTCONF = 'shorturl.hosts'
+DEFAULT_HOST = 'www' #from host_patterns in hosts.py
 
 TEMPLATES = [
     {
