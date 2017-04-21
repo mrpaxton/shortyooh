@@ -1,9 +1,10 @@
 
 
 <div style="width: 500px; margin: 10 auto;">
-    <h3>URL Shorterner</h3>
+    <h2>{{ title }}</h2>
     <form action="." method="POST"> {% csrf_token %}
-        <input name="url" type="text" placeholder="Enter a url" />
+        <!-- <input name="url" type="text" placeholder="Enter a url" /> -->
+        {{ form.as_p }}
         <input type="submit" value="Shortern" />
         
     </form>

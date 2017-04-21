@@ -16,11 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from shorterner.views import HomeView, ShorturlCBView, home_view_fbv
+from shorterner.views import HomeView, ShorturlCBView
 
 urlpatterns = [
     url(r'^suadmin/', admin.site.urls),
-    url(r'^fbv/$', home_view_fbv),
     url(r'^$', HomeView.as_view()),
     url(r'^cbv/(?P<shortcode>\w{6,15})/$', ShorturlCBView.as_view()),
 ]
