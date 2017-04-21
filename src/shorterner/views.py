@@ -8,10 +8,27 @@ from .models import ShortURL
 def test_view(request, *args, **kwargs):
     return HttpResponse("Dummy page here.")
 
+def home_view_fbv(request, *args, **kwargs):
+    #fbv way to access the POST data
+    if request.method == "POST":
+        print(request.POST)
+    return render(request, "shorterner/home.html", {})
+
 def shorturl_redirect_view(request, shortcode=None, *args, **kwargs):
     obj = get_object_or_404(ShortURL, shortcode=shortcode)
     print("Found {su}.".format(su=obj.url))
     return HttpResponseRedirect(obj.url)
+
+class HomeView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, "shorterner/home.html", {})
+
+    def post(self, request, *args, **kwargs):
+        #could access the input data like below, but better use Form
+        #that will help with validation and give clean inputs
+        print(request.POST)
+        print(request.POST.get("url"))
+        return render(request, "shorterner/home.html", {})
 
 class ShorturlCBView(View):
     def get(self, request, shortcode=None, *args, **kwargs):
