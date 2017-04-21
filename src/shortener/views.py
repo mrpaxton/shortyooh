@@ -17,7 +17,7 @@ class HomeView(View):
         get_form = SubmitURLForm()
         context = self.context
         context['form'] = get_form
-        return render(request, "shorterner/home.html", context)
+        return render(request, "shortener/home.html", context)
 
     def post(self, request, *args, **kwargs):
         #create a form object using the request.POST
@@ -26,7 +26,7 @@ class HomeView(View):
         #put the form object into context
         context = self.context
         context['form'] = post_form
-        template = "shorterner/home.html"
+        template = "shortener/home.html"
 
         if post_form.is_valid():
             print(post_form.cleaned_data.get("url"))
@@ -36,8 +36,8 @@ class HomeView(View):
                 'object': obj,
                 'created': created,
             }
-            template = "shorterner/success.html" if created \
-                    else "shorterner/already-exists.html"
+            template = "shortener/success.html" if created \
+                    else "shortener/already-exists.html"
 
         #now the keys of the context are accessible in the template
         return render(request, template, context)

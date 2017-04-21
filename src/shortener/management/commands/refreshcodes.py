@@ -1,7 +1,7 @@
 # provide the command for django admin custom command
 
 from django.core.management.base import BaseCommand, CommandError
-from shorterner.models import ShortURL
+from shortener.models import ShortURL
 
 class Command(BaseCommand):
     help = "Referesh all ShortURL shortcodes."

@@ -3,19 +3,19 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import shorterner.validators
+import shortener.validators
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('shorterner', '0006_delete_shorturlmanager'),
+        ('shortener', '0006_delete_shorturlmanager'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='shorturl',
             name='url',
-            field=models.CharField(max_length=220, validators=[shorterner.validators.validate_url, shorterner.validators.validate_url_with_com]),
+            field=models.CharField(max_length=220, validators=[shortener.validators.validate_url, shortener.validators.validate_url_with_com]),
         ),
     ]

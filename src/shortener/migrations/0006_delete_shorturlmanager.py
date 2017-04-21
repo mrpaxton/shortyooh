@@ -8,7 +8,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('shorterner', '0005_auto_20170419_0624'),
+        ('shortener', '0005_auto_20170419_0624'),
     ]
 
     operations = [

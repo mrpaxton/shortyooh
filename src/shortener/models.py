@@ -1,3 +1,4 @@
+
 from django.conf import settings
 from django.db import models
 from .utils import create_shortcode
@@ -16,7 +17,6 @@ class ShortURLManager(models.Manager):
         return qs
 
     def refresh_shortcodes(self, items=None):
-        print(items)
         qs = ShortURL.objects.filter(id__gte=1)
         if items and isinstance(items, int):
             qs = qs.order_by('-id')[:items]
