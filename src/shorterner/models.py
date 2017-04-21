@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from .utils import create_shortcode
+from .validators import validate_url, validate_url_with_com
 
 
 SHORTCODE_MAX = getattr(settings, "SHORTCODE_MAX", 15)
@@ -29,13 +30,21 @@ class ShortURLManager(models.Manager):
 
 
 class ShortURL(models.Model):
-    objects = ShortURLManager()
-    url = models.CharField(max_length=220, )
-    shortcode = models.CharField(max_length=SHORTCODE_MAX, unique=True, blank=True)
-    updated = models.DateTimeField(auto_now=True) #when model saved
-    timestamp = models.DateTimeField(auto_now_add=True) #when model screated
-    active = models.BooleanField(default=True)
 
+    objects = ShortURLManager()
+
+    url = models.CharField(
+        max_length=220,
+        validators=[validate_url, validate_url_with_com],
+    )
+    shortcode = models.CharField(
+        max_length=SHORTCODE_MAX,
+        unique=True,
+        blank=True,
+    )
+    updated = models.DateTimeField(auto_now=True) #when model saved
+    timestamp = models.DateTimeField(auto_now_add=True) #when model created
+    active = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
         if not self.shortcode or self.shortcode == "":

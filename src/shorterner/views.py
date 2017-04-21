@@ -8,26 +8,39 @@ from .forms import SubmitURLForm
 
 
 class HomeView(View):
+    context = {
+        'title': "Shortyooh.com helps you shortern URLs",
+        'form': None,
+    }
+
     def get(self, request, *args, **kwargs):
-        the_form = SubmitURLForm()
-        context = {
-            'title': "Shortyooh.com helps you shortern URLs",
-            'form': the_form,
-        }
+        get_form = SubmitURLForm()
+        context = self.context
+        context['form'] = get_form
         return render(request, "shorterner/home.html", context)
 
     def post(self, request, *args, **kwargs):
         #create a form object using the request.POST
-        the_form = SubmitURLForm(request.POST)
-        if the_form.is_valid():
-            print(the_form.cleaned_data)
+        post_form = SubmitURLForm(request.POST)
+
         #put the form object into context
-        context = {
-            'title': "Shortyooh.com helps you shortern URLs",
-            'form': the_form,
-        }
+        context = self.context
+        context['form'] = post_form
+        template = "shorterner/home.html"
+
+        if post_form.is_valid():
+            print(post_form.cleaned_data.get("url"))
+            new_url = "http://" + post_form.cleaned_data.get("url")
+            obj, created = ShortURL.objects.get_or_create(url=new_url)
+            context = {
+                'object': obj,
+                'created': created,
+            }
+            template = "shorterner/success.html" if created \
+                    else "shorterner/already-exists.html"
+
         #now the keys of the context are accessible in the template
-        return render(request, "shorterner/home.html", context)
+        return render(request, template, context)
 
 class ShorturlCBView(View):
     def get(self, request, shortcode=None, *args, **kwargs):
