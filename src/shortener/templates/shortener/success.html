@@ -4,13 +4,12 @@
 {% load material_form %}
 
 <div class="center col s12 m8 offset-m2 l8 offset-l2">
-    <h3>Success, saved to the database</h3>
 
-    <p>{{ object.url }}</p>
+    <h3>Great! You've created a short URL</h3>
 
-    <p>{{ object.shortcode }}</p>
+    <h5><a href="{{ object.get_short_url }}">{{ object.get_short_url }}</a></h5>
 
-    <p><a href="{{ object.get_short_url }}">{{ object.get_short_url }}</a></p>
+    <br/>
+    <a href="/" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
 
-    <a href="/">+ New</a>
 </div>

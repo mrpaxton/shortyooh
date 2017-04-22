@@ -5,17 +5,14 @@
 {% load material_form %}
 
 <div class="center col s12 m8 offset-m2 l8 offset-l2">
-    <h3>The URL has already existed.</h3>
 
-    <p>{{ object.url }}</p>
-
-    <p>{{ object.shortcode }}</p>
+    <h3>Sweet! You had a short URL</h3>
+    <h5><a href="{{ object.get_short_url }}">{{ object.get_short_url }}</a></h5>
 
     {% if object.clickevent %}
-        <p>Count: {{ object.clickevent.count }}</p>
+        <h5>Redirect count: {{ object.clickevent.count }}</h5>
     {% endif %}
 
-    <p><a href="{{ object.get_short_url }}">{{ object.get_short_url }}</a></p>
+    <a href="/" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
 
-    <a href="/">+ New</a>
 </div>

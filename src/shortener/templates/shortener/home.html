@@ -9,6 +9,8 @@
     <form action="." method="POST"> 
 		{% csrf_token %}
 		{{ form.as_p }}
-        <input type="submit" name="_submit" class="btn btn-primary btn-lg" value="Shorten" />
+        <button class="btn btn-lg teal" type="submit" name="action">
+            Shorten<i class="material-icons right">add</i>
+        </button>
     </form>
 </div>
