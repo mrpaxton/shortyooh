@@ -40,9 +40,8 @@ INSTALLED_APPS = [
     #3rd party
     'django_hosts',
     #custom apps
+    'analytics',
     'shortener',
-
-
 ]
 
 MIDDLEWARE = [

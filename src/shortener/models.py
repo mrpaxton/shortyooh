@@ -8,6 +8,7 @@ from .validators import validate_url, validate_url_with_com
 
 SHORTCODE_MAX = getattr(settings, "SHORTCODE_MAX", 15)
 
+
 class ShortURLManager(models.Manager):
 
     # get_object_or_404() calls _get_queryset() which receives manager.all()

@@ -1,23 +1,27 @@
 from django.shortcuts import render, get_object_or_404
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views import View
 
+from analytics.models import ClickEvent
 from .models import ShortURL
 from .forms import SubmitURLForm
 
 
 class HomeView(View):
+
     context = {
         'title': "Shortyooh.com helps you shortern URLs",
         'form': None,
     }
+
 
     def get(self, request, *args, **kwargs):
         get_form = SubmitURLForm()
         context = self.context
         context['form'] = get_form
         return render(request, "shortener/home.html", context)
+
 
     def post(self, request, *args, **kwargs):
         #create a form object using the request.POST
@@ -42,8 +46,16 @@ class HomeView(View):
         #now the keys of the context are accessible in the template
         return render(request, template, context)
 
-class ShorturlCBView(View):
+
+
+class URLRedirectView(View):
+
+
     def get(self, request, shortcode=None, *args, **kwargs):
-        obj = get_object_or_404(ShortURL, shortcode=shortcode)
-        print("Found {su}.".format(su=obj.url))
+        qs = ShortURL.objects.filter(shortcode__iexact=shortcode)
+        if qs.count() != 1 and not qs.exists():
+            raise Http404
+        obj = qs.first()
+        print(ClickEvent.objects.create_event(obj))
         return HttpResponseRedirect(obj.url)
+
