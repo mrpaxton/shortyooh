@@ -1,5 +1,6 @@
 
 from django.conf import settings
+from django_hosts.resolvers import reverse
 from django.db import models
 from .utils import create_shortcode
 from .validators import validate_url, validate_url_with_com
@@ -56,3 +57,13 @@ class ShortURL(models.Model):
 
     def __unicode__(self):
         return str(self.url)
+
+    def get_short_url(self):
+        #reverse call to django_hosts reverse() helper
+        url_path = reverse(
+            "scode",
+            kwargs={'shortcode': self.shortcode},
+            host="www",
+            scheme="http"
+        )
+        return url_path
