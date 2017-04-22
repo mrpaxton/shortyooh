@@ -1,10 +1,14 @@
 
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
 
-<div style="width: 500px; margin: 10 auto;">
-    <h2>{{ title }}</h2>
-    <form action="." method="POST"> {% csrf_token %}
-        <!-- <input name="url" type="text" placeholder="Enter a url" /> -->
-        {{ form.as_p }}
-        <input type="submit" value="Shorten" />
+{% load material_form %}
+
+<div style="margin:40px" class="center col s12 m8 offset-m2 l8 offset-l2">
+    <h3>{{ title }}</h3>
+    <form action="." method="POST"> 
+		{% csrf_token %}
+		{{ form.as_p }}
+        <input type="submit" name="_submit" class="btn btn-primary btn-lg" value="Shorten" />
     </form>
 </div>

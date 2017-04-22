@@ -1,4 +1,9 @@
-<div style="align-text: center; width: 800px; margin: 0 auto;">
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
+
+{% load material_form %}
+
+<div class="center col s12 m8 offset-m2 l8 offset-l2">
     <h3>Success, saved to the database</h3>
 
     <p>{{ object.url }}</p>
