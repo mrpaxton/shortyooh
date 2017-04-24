@@ -11,7 +11,7 @@ from .forms import SubmitURLForm
 class HomeView(View):
 
     context = {
-        'title': "Shortyooh.com helps you shortern URLs",
+        'title': "Let's shorten some URLs",
         'form': None,
     }
 
@@ -53,9 +53,10 @@ class URLRedirectView(View):
 
     def get(self, request, shortcode=None, *args, **kwargs):
         qs = ShortURL.objects.filter(shortcode__iexact=shortcode)
-        if qs.count() != 1 and not qs.exists():
+        short_urls = list(qs)
+        if not short_urls or len(short_urls) != 1:
             raise Http404
-        obj = qs.first()
-        print(ClickEvent.objects.create_event(obj))
+        obj = short_urls[0]
+        ClickEvent.objects.create_event(obj)
         return HttpResponseRedirect(obj.url)
 

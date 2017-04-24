@@ -60,7 +60,7 @@ class ShortURL(models.Model):
         return str(self.url)
 
     def get_short_url(self):
-        #reverse call to django_hosts reverse() helper
+        #reverse call to django_hosts resolver's reverse() helper
         url_path = reverse(
             "scode",
             kwargs={'shortcode': self.shortcode},

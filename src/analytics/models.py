@@ -1,10 +1,11 @@
-from django.db import models
 
-# Create your models here.
+from django.db import models
 from shortener.models import ShortURL
 
 
+
 class ClickEventManager(models.Manager):
+
 
     def create_event(self, short_url_instance):
         if isinstance(short_url_instance, ShortURL):
@@ -16,10 +17,11 @@ class ClickEventManager(models.Manager):
 
 
 class ClickEvent(models.Model):
-    short_url = models.OneToOneField(ShortURL)
-    count = models.IntegerField(default=0)
-    updated = models.DateTimeField(auto_now=True)
-    timestamp = models.DateTimeField(auto_now_add=True)
+
+    short_url   = models.OneToOneField(ShortURL)
+    count       = models.IntegerField(default=0)
+    updated     = models.DateTimeField(auto_now=True)
+    timestamp   = models.DateTimeField(auto_now_add=True)
 
     objects = ClickEventManager()
 
