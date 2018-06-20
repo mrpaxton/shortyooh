@@ -25,7 +25,7 @@ SECRET_KEY = '--p(n51z+wnrezym_n44av8e13=6#e(9fdi63r-!t!4bd%t$cd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.shortyooh.com']
+ALLOWED_HOSTS = ['www.shortyooh.com', 'localhost']
 
 
 # Application definition

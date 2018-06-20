@@ -89,7 +89,7 @@ celerybeat-schedule
 .env
 
 # virtualenv
-shorturl-venv/
+*venv/
 .venv/
 venv/
 ENV/
